@@ -1,5 +1,5 @@
 local GetContainerNumSlots = GetContainerNumSlots
-local GetContainerItemLink = GetContainerItemLink
+local GetContainerItemID = GetContainerItemID
 local UseContainerItem = UseContainerItem
 
 local GetKeystoneBagSlot = function()
@@ -8,15 +8,13 @@ local GetKeystoneBagSlot = function()
 	
 	for Bag = 0, 4 do
 		for Slot = 1, GetContainerNumSlots(Bag) do
-			local Link = GetContainerItemLink(Bag, Slot)
+			local ID = GetContainerItemID(Bag, Slot)
 			
-			if Link then
-				if strfind(Link, "Keystone") then
-					KeystoneBag = Bag
-					KeystoneSlot = Slot
-					
-					break
-				end
+			if (ID and ID == 158923) then
+				KeystoneBag = Bag
+				KeystoneSlot = Slot
+				
+				break
 			end
 		end
 	end
