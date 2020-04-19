@@ -22,18 +22,20 @@ local GetKeystoneBagSlot = function()
 	return KeystoneBag, KeystoneSlot
 end
 
+local OnShow = function(self)
+	local Bag, Slot = GetKeystoneBagSlot()
+	
+	if (Bag and Slot) then
+		UseContainerItem(Bag, Slot)
+	end
+end
+
 local KeyInput = CreateFrame("Frame")
 KeyInput:RegisterEvent("ADDON_LOADED")
 KeyInput:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "Blizzard_ChallengesUI") then
 		if ChallengesKeystoneFrame then
-			ChallengesKeystoneFrame:HookScript("OnShow", function(self)
-				local Bag, Slot = GetKeystoneBagSlot()
-				
-				if (Bag and Slot) then
-					UseContainerItem(Bag, Slot)
-				end
-			end)
+			ChallengesKeystoneFrame:HookScript("OnShow", OnShow)
 		end
 		
 		self:UnregisterEvent(event)
