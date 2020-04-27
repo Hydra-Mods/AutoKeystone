@@ -1,10 +1,9 @@
 local GetContainerNumSlots = GetContainerNumSlots
 local GetContainerItemID = GetContainerItemID
 local UseContainerItem = UseContainerItem
+local ID
 
 local OnShow = function(self)
-	local ID
-	
 	for Bag = 0, 4 do
 		for Slot = 1, GetContainerNumSlots(Bag) do
 			ID = GetContainerItemID(Bag, Slot)
