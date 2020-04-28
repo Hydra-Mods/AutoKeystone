@@ -1,6 +1,5 @@
 local GetContainerNumSlots = GetContainerNumSlots
 local GetContainerItemID = GetContainerItemID
-local UseContainerItem = UseContainerItem
 local ID
 
 local OnShow = function()
