@@ -1,4 +1,3 @@
-local GetContainerNumSlots = GetContainerNumSlots
 local GetContainerItemID = GetContainerItemID
 local ID
 
