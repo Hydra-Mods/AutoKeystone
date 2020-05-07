@@ -1,10 +1,9 @@
 local GetContainerItemID = GetContainerItemID
-local ID
 
 local OnShow = function()
 	for Bag = 0, 4 do
 		for Slot = 1, GetContainerNumSlots(Bag) do
-			ID = GetContainerItemID(Bag, Slot)
+			local ID = GetContainerItemID(Bag, Slot)
 			
 			if (ID and ID == 158923) then
 				UseContainerItem(Bag, Slot)

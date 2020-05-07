@@ -1,6 +1,6 @@
 ## Interface: 80300
 ## Author: Hydra
-## Version: 1.05
+## Version: 1.06
 ## Title: AutoKeystone
 ## Notes: Insert keystones into the Font of Power automatically
 
