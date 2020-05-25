@@ -9,9 +9,7 @@ AutoKeystone:SetScript("OnEvent", function(self, event, addon)
 						local ID = GetContainerItemID(Bag, Slot)
 						
 						if (ID and ID == 158923) then
-							UseContainerItem(Bag, Slot)
-							
-							break
+							return UseContainerItem(Bag, Slot)
 						end
 					end
 				end
