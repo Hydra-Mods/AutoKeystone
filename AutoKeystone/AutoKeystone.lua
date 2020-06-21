@@ -1,6 +1,6 @@
 local AutoKeystone = CreateFrame("Frame")
-AutoKeystone:RegisterEvent("ADDON_LOADED")
-AutoKeystone:SetScript("OnEvent", function(self, event, addon)
+
+function AutoKeystone:OnEvent(event, addon)
 	if (addon == "Blizzard_ChallengesUI") then
 		if ChallengesKeystoneFrame then
 			ChallengesKeystoneFrame:HookScript("OnShow", function()
@@ -18,4 +18,7 @@ AutoKeystone:SetScript("OnEvent", function(self, event, addon)
 			self:UnregisterEvent(event)
 		end
 	end
-end)
+end
+
+AutoKeystone:RegisterEvent("ADDON_LOADED")
+AutoKeystone:SetScript("OnEvent", AutoKeystone.OnEvent)
