@@ -1,5 +1,8 @@
 local AutoKeystone = CreateFrame("Frame")
 
+local GetContainerNumSlots = GetContainerNumSlots
+local GetContainerItemID = GetContainerItemID
+
 function AutoKeystone:OnEvent(event, addon)
 	if (addon == "Blizzard_ChallengesUI") then
 		if ChallengesKeystoneFrame then
