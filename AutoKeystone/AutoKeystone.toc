@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Author: Hydra
-## Version: 1.12
-## Title: AutoKeystone
+## Version: 1.13
+## Title: Auto Keystone
 ## Notes: Insert keystones into the Font of Power automatically
 
 AutoKeystone.lua
