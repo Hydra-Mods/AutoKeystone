@@ -2,6 +2,11 @@ local AutoKeystone = CreateFrame("Frame")
 
 local GetContainerItemID = GetContainerItemID
 
+local Keystones = {
+	[158923] = true,
+	[151086] = true,
+}
+
 function AutoKeystone:OnEvent(event, addon)
 	if (addon == "Blizzard_ChallengesUI") then
 		if ChallengesKeystoneFrame then
@@ -10,7 +15,7 @@ function AutoKeystone:OnEvent(event, addon)
 					for Slot = 1, GetContainerNumSlots(Bag) do
 						local ID = GetContainerItemID(Bag, Slot)
 						
-						if (ID and ((ID == 158923) or (ID == 151086))) then
+						if (ID and Keystones[ID]) then
 							return UseContainerItem(Bag, Slot)
 						end
 					end
