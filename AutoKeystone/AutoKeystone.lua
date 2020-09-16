@@ -1,3 +1,8 @@
+local Keystones = {
+	[151086] = true,
+	[158923] = true,
+}
+
 local AutoKeystone = CreateFrame("Frame")
 AutoKeystone:RegisterEvent("ADDON_LOADED")
 AutoKeystone:SetScript("OnEvent", function(self, event, addon)
@@ -8,7 +13,7 @@ AutoKeystone:SetScript("OnEvent", function(self, event, addon)
 					for Slot = 1, GetContainerNumSlots(Bag) do
 						local ID = GetContainerItemID(Bag, Slot)
 						
-						if (ID and (ID == 158923 or ID == 151086)) then
+						if (ID and Keystones[ID]) then
 							return UseContainerItem(Bag, Slot)
 						end
 					end
