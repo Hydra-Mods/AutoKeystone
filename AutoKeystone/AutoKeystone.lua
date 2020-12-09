@@ -15,7 +15,7 @@ function AutoKeystone:OnShow()
 		for Slot = 1, GetContainerNumSlots(Bag) do
 			local ID = GetContainerItemID(Bag, Slot)
 			
-			if (ID and ID == 151086) then
+			if (ID and ID == 180653) then
 				return UseContainerItem(Bag, Slot)
 			end
 		end
