@@ -1,7 +1,7 @@
 ## Interface: 90002
 ## Author: Hydra
-## Version: 1.30
+## Version: 1.31
 ## Title: Auto Keystone
-## Notes: Insert keystones into the Font of Power automatically
+## Notes: Automatically insert keystones into the Font of Power
 
 AutoKeystone.lua
