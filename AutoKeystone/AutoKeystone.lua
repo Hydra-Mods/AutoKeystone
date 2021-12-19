@@ -31,9 +31,10 @@ local OnEvent = function(self, event, addon)
 		end
 
 		self:UnregisterEvent(event)
+		self:SetScript("OnEvent", nil)
 	end
 end
 
-local AK = CreateFrame("Frame")
-AK:RegisterEvent("ADDON_LOADED")
-AK:SetScript("OnEvent", OnEvent)
+local AutoKeystone = CreateFrame("Frame")
+AutoKeystone:RegisterEvent("ADDON_LOADED")
+AutoKeystone:SetScript("OnEvent", OnEvent)
