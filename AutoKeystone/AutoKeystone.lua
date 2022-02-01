@@ -1,28 +1,27 @@
 local OnShow = function()
 	local ID
 
-	for Bag = 0, NUM_BAG_SLOTS do
-		for Slot = 1, GetContainerNumSlots(Bag) do
-			ID = GetContainerItemID(Bag, Slot)
+	for b = 0, NUM_BAG_SLOTS do
+		for s = 1, GetContainerNumSlots(b) do
+			ID = GetContainerItemID(b, s)
 
-			if (ID and ID == 180653) then
-				return UseContainerItem(Bag, Slot)
+			if ID and ID == 180653 then
+				return UseContainerItem(b, s)
 			end
 		end
 	end
 end
 
 local OnEvent = function(self, event, addon)
-	if (addon ~= "Blizzard_ChallengesUI") then
+	if addon ~= "Blizzard_ChallengesUI" then
 		return
 	end
 
 	if ChallengesKeystoneFrame then
 		local Frame = ChallengesKeystoneFrame
-
 		Frame:HookScript("OnShow", OnShow)
 
-		if (not Frame:IsMovable()) then
+		if not Frame:IsMovable() then
 			Frame:SetMovable(true)
 			Frame:RegisterForDrag("LeftButton")
 			Frame:SetClampedToScreen(true)
@@ -31,10 +30,9 @@ local OnEvent = function(self, event, addon)
 		end
 
 		self:UnregisterEvent(event)
-		self:SetScript("OnEvent", nil)
 	end
 end
 
-local AutoKeystone = CreateFrame("Frame")
-AutoKeystone:RegisterEvent("ADDON_LOADED")
-AutoKeystone:SetScript("OnEvent", OnEvent)
+local AK = CreateFrame("Frame")
+AK:RegisterEvent("ADDON_LOADED")
+AK:SetScript("OnEvent", OnEvent)
