@@ -1,19 +1,23 @@
 local OnShow = function()
 	local ID
 
-	for b = 0, NUM_BAG_SLOTS do
-		for s = 1, GetContainerNumSlots(b) do
-			ID = GetContainerItemID(b, s)
+	for bag = 0, NUM_BAG_SLOTS do
+		for slot = 1, GetContainerNumSlots(bag) do
+			ID = GetContainerItemID(bag, slot)
 
-			if ID and ID == 180653 then
-				return UseContainerItem(b, s)
+			if ID then
+				local Type, SubType = select(6, GetItemInfo(ID))
+				
+				if (Type == "Reagent" and SubType == "Keystone") then
+					return UseContainerItem(bag, slot)
+				end
 			end
 		end
 	end
 end
 
 local OnEvent = function(self, event, addon)
-	if addon ~= "Blizzard_ChallengesUI" then
+	if (addon ~= "Blizzard_ChallengesUI") then
 		return
 	end
 
@@ -21,7 +25,7 @@ local OnEvent = function(self, event, addon)
 		local Frame = ChallengesKeystoneFrame
 		Frame:HookScript("OnShow", OnShow)
 
-		if not Frame:IsMovable() then
+		if (not Frame:IsMovable()) then
 			Frame:SetMovable(true)
 			Frame:RegisterForDrag("LeftButton")
 			Frame:SetClampedToScreen(true)
