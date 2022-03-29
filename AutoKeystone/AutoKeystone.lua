@@ -7,7 +7,7 @@ local OnShow = function()
 
 			if ID then
 				local Type, SubType = select(6, GetItemInfo(ID))
-				
+
 				if (Type == "Reagent" and SubType == "Keystone") then
 					return UseContainerItem(bag, slot)
 				end
@@ -17,9 +17,7 @@ local OnShow = function()
 end
 
 local OnEvent = function(self, event, addon)
-	if (addon ~= "Blizzard_ChallengesUI") then
-		return
-	end
+	if (addon ~= "Blizzard_ChallengesUI") then return end
 
 	if ChallengesKeystoneFrame then
 		local Frame = ChallengesKeystoneFrame
