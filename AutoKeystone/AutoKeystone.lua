@@ -6,16 +6,16 @@ AK:SetScript("OnEvent", function(self, event, addon)
 	if ChallengesKeystoneFrame then
 		local Frame = ChallengesKeystoneFrame
 		Frame:HookScript("OnShow", function()
-			local ID, Type, SubType
+			local ID, ClassID, SubClassID
 
 			for bag = 0, NUM_BAG_SLOTS do
 				for slot = 1, GetContainerNumSlots(bag) do
 					ID = GetContainerItemID(bag, slot)
 
 					if ID then
-						Type, SubType = select(6, GetItemInfo(ID))
+						ClassID, SubClassID = select(12, GetItemInfo(ID))
 
-						if Type == "Reagent" and SubType == "Keystone" then
+						if (ClassID == 5 and SubClassID == 1) then
 							return UseContainerItem(bag, slot)
 						end
 					end
