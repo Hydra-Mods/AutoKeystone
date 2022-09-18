@@ -11,7 +11,7 @@ AK:SetScript("OnEvent", function(self, event, addon)
 					ID = GetContainerItemID(bag, slot)
 					if ID then
 						ClassID, SubClassID = select(12, GetItemInfo(ID))
-						if (ClassID == 5 and SubClassID == 1) then
+						if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
 							return UseContainerItem(bag, slot)
 						end
 					end
