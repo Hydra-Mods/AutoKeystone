@@ -1,18 +1,18 @@
-local UseContainerItem
-local GetContainerItemID
-local GetContainerNumSlots
-local NUM_BAG_SLOTS
+local UseItem
+local GetItemID
+local GetNumSlots
+local NUM_SLOTS
 
 if C_Container then
-	NUM_BAG_SLOTS = NUM_BAG_FRAMES
-	UseContainerItem = C_Container.UseContainerItem
-	GetContainerItemID = C_Container.GetContainerItemID
-	GetContainerNumSlots = C_Container.GetContainerNumSlots
+	NUM_SLOTS = NUM_BAG_FRAMES
+	UseItem = C_Container.UseContainerItem
+	GetItemID = C_Container.GetContainerItemID
+	GetNumSlots = C_Container.GetContainerNumSlots
 else
-	NUM_BAG_SLOTS = NUM_BAG_SLOTS
-	UseContainerItem = UseContainerItem
-	GetContainerItemID = GetContainerItemID
-	GetContainerNumSlots = GetContainerNumSlots
+	NUM_SLOTS = NUM_BAG_SLOTS
+	UseItem = UseContainerItem
+	GetItemID = GetContainerItemID
+	GetNumSlots = GetContainerNumSlots
 end
 
 local AK = CreateFrame("Frame")
@@ -27,14 +27,14 @@ AK:SetScript("OnEvent", function(self, event, addon)
 		Frame:HookScript("OnShow", function()
 			local ID, ClassID, SubClassID
 			
-			for bag = 0, NUM_BAG_SLOTS do
-				for slot = 1, GetContainerNumSlots(bag) do
-					ID = GetContainerItemID(bag, slot)
+			for bag = 0, NUM_SLOTS do
+				for slot = 1, GetNumSlots(bag) do
+					ID = GetItemID(bag, slot)
 					
 					if ID then
 						ClassID, SubClassID = select(12, GetItemInfo(ID))
 						if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
-							return UseContainerItem(bag, slot)
+							return UseItem(bag, slot)
 						end
 					end
 				end
