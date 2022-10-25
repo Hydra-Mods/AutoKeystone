@@ -1,32 +1,15 @@
-local UseItem
-local GetItemID
-local GetNumSlots
-local NUM_SLOTS
-
-if C_Container then
-	NUM_SLOTS = NUM_BAG_FRAMES
-	UseItem = C_Container.UseContainerItem
-	GetItemID = C_Container.GetContainerItemID
-	GetNumSlots = C_Container.GetContainerNumSlots
-else
-	NUM_SLOTS = NUM_BAG_SLOTS
-	UseItem = UseContainerItem
-	GetItemID = GetContainerItemID
-	GetNumSlots = GetContainerNumSlots
-end
-
 local OnShow = function()
 	local ID, ClassID, SubClassID
 
-	for bag = 0, NUM_SLOTS do
-		for slot = 1, GetNumSlots(bag) do
-			ID = GetItemID(bag, slot)
+	for bag = 0, NUM_BAG_FRAMES do
+		for slot = 1, C_Container.GetContainerNumSlots(bag) do
+			ID = C_Container.GetContainerItemID(bag, slot)
 
 			if ID then
 				ClassID, SubClassID = select(12, GetItemInfo(ID))
 
 				if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
-					return UseItem(bag, slot)
+					return C_Container.UseContainerItem(bag, slot)
 				end
 			end
 		end
