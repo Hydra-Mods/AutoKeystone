@@ -1,15 +1,24 @@
+local GetContainerNumSlots = GetContainerNumSlots
+local GetContainerItemID = GetContainerItemID
+local UseContainerItem = UseContainerItem
+
+-- Temporary during DF prepatch
+if C_Container and C_Container.GetContainerNumSlots then GetContainerNumSlots = C_Container.GetContainerNumSlots end
+if C_Container and C_Container.GetContainerItemID then GetContainerItemID = C_Container.GetContainerItemID end
+if C_Container and C_Container.UseContainerItem then UseContainerItem = C_Container.UseContainerItem end
+
 local OnShow = function()
 	local ID, ClassID, SubClassID
 
 	for bag = 0, NUM_BAG_FRAMES do
-		for slot = 1, C_Container.GetContainerNumSlots(bag) do
-			ID = C_Container.GetContainerItemID(bag, slot)
+		for slot = 1, GetContainerNumSlots(bag) do
+			ID = GetContainerItemID(bag, slot)
 
 			if ID then
 				ClassID, SubClassID = select(12, GetItemInfo(ID))
 
 				if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
-					return C_Container.UseContainerItem(bag, slot)
+					return UseContainerItem(bag, slot)
 				end
 			end
 		end
