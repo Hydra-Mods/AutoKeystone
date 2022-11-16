@@ -1,11 +1,3 @@
-local GetContainerNumSlots = GetContainerNumSlots
-local GetContainerItemID = GetContainerItemID
-local UseContainerItem = UseContainerItem
-
-if C_Container and C_Container.GetContainerNumSlots then GetContainerNumSlots = C_Container.GetContainerNumSlots end
-if C_Container and C_Container.GetContainerItemID then GetContainerItemID = C_Container.GetContainerItemID end
-if C_Container and C_Container.UseContainerItem then UseContainerItem = C_Container.UseContainerItem end
-
 local AK = CreateFrame("Frame")
 AK:RegisterEvent("ADDON_LOADED")
 AK:SetScript("OnEvent", function(self, event, addon)
@@ -19,14 +11,14 @@ AK:SetScript("OnEvent", function(self, event, addon)
 			local ID, ClassID, SubClassID
 
 			for bag = 0, NUM_BAG_FRAMES do
-				for slot = 1, GetContainerNumSlots(bag) do
-					ID = GetContainerItemID(bag, slot)
+				for slot = 1, C_Container.GetContainerNumSlots(bag) do
+					ID = C_Container.GetContainerItemID(bag, slot)
 
 					if ID then
 						ClassID, SubClassID = select(12, GetItemInfo(ID))
 
 						if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
-							return UseContainerItem(bag, slot)
+							return C_Container.UseContainerItem(bag, slot)
 						end
 					end
 				end
