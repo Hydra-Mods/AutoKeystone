@@ -1,3 +1,5 @@
+local IDs = {[138019] = true, [151086] = true, [158923] = true, [180653] = true}
+
 local AK = CreateFrame("Frame")
 AK:RegisterEvent("ADDON_LOADED")
 AK:SetScript("OnEvent", function(self, event, addon)
@@ -17,7 +19,7 @@ AK:SetScript("OnEvent", function(self, event, addon)
 					if ID then
 						ClassID, SubClassID = select(12, GetItemInfo(ID))
 
-						if (ClassID == 5 and SubClassID == 1) or (ID == 180653) then
+						if (ClassID == 5 and SubClassID == 1) or IDs[ID] then
 							return C_Container.UseContainerItem(bag, slot)
 						end
 					end
