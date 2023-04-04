@@ -1,4 +1,4 @@
-local IDs = {[138019] = 1, [151086] = 1, [158923] = 1, [180653] = 1, [186159] = 1}
+local IDs = {[138019] = 1, [151086] = 1, [158923] = 1, [180653] = 1}
 
 local OnShow = function()
 	local ID, Class, SubClass
