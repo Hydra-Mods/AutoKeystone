@@ -1,6 +1,6 @@
 ## Interface: 100007
 ## Author: Hydra
-## Version: 1.67
+## Version: 1.68
 ## Title: Auto Keystone
 ## Notes: Automatically insert keystones into the Font of Power
 
