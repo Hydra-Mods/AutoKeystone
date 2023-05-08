@@ -1,7 +1,8 @@
 ## Interface: 100100
 ## Author: Hydra
-## Version: 1.69
+## Version: 1.70
 ## Title: Auto Keystone
 ## Notes: Automatically insert keystones into the Font of Power
+## IconTexture: Interface\Icons\inv_relics_hourglass
 
 AutoKeystone.lua
