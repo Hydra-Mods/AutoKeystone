@@ -1,15 +1,20 @@
-local OnShow = function()
-	local ID, Class, SubClass
+local ReagentClass = Enum.ItemClass.Reagent
+local KeystoneClass = Enum.ItemClass.Keystone
 
+local UseContainerItem = C_Container.UseContainerItem
+local GetContainerItemID = C_Container.GetContainerItemID
+local GetContainerNumSlots = C_Container.GetContainerNumSlots
+
+local OnShow = function()
 	for bag = 0, NUM_BAG_FRAMES do
-		for slot = 1, C_Container.GetContainerNumSlots(bag) do
-			ID = C_Container.GetContainerItemID(bag, slot)
+		for slot = 1, GetContainerNumSlots(bag) do
+			local ID = GetContainerItemID(bag, slot)
 
 			if ID then
-				Class, SubClass = select(12, GetItemInfo(ID))
+				local Class, SubClass = select(12, GetItemInfo(ID))
 
-				if (Class == Enum.ItemClass.Reagent and SubClass == Enum.ItemReagentSubclass.Keystone) then
-					return C_Container.UseContainerItem(bag, slot)
+				if (Class == ReagentClass and SubClass == KeystoneClass) then
+					return UseContainerItem(bag, slot)
 				end
 			end
 		end
@@ -21,21 +26,23 @@ local OnEvent = function(self, event, addon)
 		return
 	end
 
-	if ChallengesKeystoneFrame then
-		local Frame = ChallengesKeystoneFrame
+	local Frame = ChallengesKeystoneFrame
 
-		Frame:HookScript("OnShow", OnShow)
-
-		if (not Frame:IsMovable()) then
-			Frame:SetMovable(true)
-			Frame:SetClampedToScreen(true)
-			Frame:RegisterForDrag("LeftButton")
-			Frame:SetScript("OnDragStart", Frame.StartMoving)
-			Frame:SetScript("OnDragStop", Frame.StopMovingOrSizing)
-		end
-
-		self:UnregisterEvent(event)
+	if (not Frame) then
+		return
 	end
+
+	Frame:HookScript("OnShow", OnShow)
+
+	if (not Frame:IsMovable()) then
+		Frame:SetMovable(true)
+		Frame:SetClampedToScreen(true)
+		Frame:RegisterForDrag("LeftButton")
+		Frame:SetScript("OnDragStart", Frame.StartMoving)
+		Frame:SetScript("OnDragStop", Frame.StopMovingOrSizing)
+	end
+
+	self:UnregisterEvent(event)
 end
 
 local AK = CreateFrame("Frame")
