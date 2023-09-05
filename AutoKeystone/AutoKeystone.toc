@@ -1,6 +1,6 @@
-## Interface: 100105
+## Interface: 100107
 ## Author: Hydra
-## Version: 1.75
+## Version: 1.77
 ## Title: Auto Keystone
 ## Notes: Automatically insert keystones into the Font of Power
 ## IconTexture: Interface\Icons\inv_relics_hourglass

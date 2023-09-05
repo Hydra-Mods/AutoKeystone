@@ -1,7 +1,6 @@
 local ReagentClass = Enum.ItemClass.Reagent
 local KeystoneClass = Enum.ItemClass.Keystone
 
-local UseContainerItem = C_Container.UseContainerItem
 local GetContainerItemID = C_Container.GetContainerItemID
 local GetContainerNumSlots = C_Container.GetContainerNumSlots
 
@@ -14,7 +13,7 @@ local OnShow = function()
 				local Class, SubClass = select(12, GetItemInfo(ID))
 
 				if (Class == ReagentClass and SubClass == KeystoneClass) then
-					return UseContainerItem(bag, slot)
+					return C_Container.UseContainerItem(bag, slot)
 				end
 			end
 		end
