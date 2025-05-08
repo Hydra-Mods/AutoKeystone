@@ -1,10 +1,8 @@
-local ReagentClass = Enum.ItemClass.Reagent
-local KeystoneClass = Enum.ItemClass.Keystone
+local ReagentClass, KeystoneClass = Enum.ItemClass.Reagent, Enum.ItemReagentSubclass.Keystone
+local GetContainerItemID, GetContainerNumSlots, GetItemInfo = C_Container.GetContainerItemID, C_Container.GetContainerNumSlots, C_Item.GetItemInfo
+local select = select
 
-local GetContainerItemID = C_Container.GetContainerItemID
-local GetContainerNumSlots = C_Container.GetContainerNumSlots
-
-local OnShow = function()
+local SlotKeystone = function()
 	for bag = 0, NUM_BAG_FRAMES do
 		for slot = 1, GetContainerNumSlots(bag) do
 			local ID = GetContainerItemID(bag, slot)
@@ -12,28 +10,33 @@ local OnShow = function()
 			if ID then
 				local Class, SubClass = select(12, GetItemInfo(ID))
 
-				if (Class == ReagentClass and SubClass == KeystoneClass) then
-					return C_Container.UseContainerItem(bag, slot)
+				if Class == ReagentClass and SubClass == KeystoneClass then
+					C_Container.PickupContainerItem(bag, slot)
+
+					if C_Cursor.GetCursorItem() then
+						C_ChallengeMode.SlotKeystone()
+						return true
+					end
 				end
 			end
 		end
 	end
+
+	return false
 end
 
-local OnEvent = function(self, event, addon)
-	if (addon ~= "Blizzard_ChallengesUI") then
-		return
-	end
+local AK = CreateFrame("Frame")
+AK:RegisterEvent("ADDON_LOADED")
+AK:SetScript("OnEvent", function(self, event, addon)
+	if addon ~= "Blizzard_ChallengesUI" then return end
 
 	local Frame = ChallengesKeystoneFrame
 
-	if (not Frame) then
-		return
-	end
+	if not Frame then return end
 
-	Frame:HookScript("OnShow", OnShow)
+	Frame:HookScript("OnShow", SlotKeystone)
 
-	if (not Frame:IsMovable()) then
+	if not Frame:IsMovable() then
 		Frame:SetMovable(true)
 		Frame:SetClampedToScreen(true)
 		Frame:RegisterForDrag("LeftButton")
@@ -42,8 +45,10 @@ local OnEvent = function(self, event, addon)
 	end
 
 	self:UnregisterEvent(event)
-end
+end)
 
-local AK = CreateFrame("Frame")
-AK:RegisterEvent("ADDON_LOADED")
-AK:SetScript("OnEvent", OnEvent)
+SLASH_AUTOKEYSTONE1 = "/ak"
+SLASH_AUTOKEYSTONE2 = "/aks"
+SlashCmdList["AUTOKEYSTONE"] = function()
+	SlotKeystone()
+end

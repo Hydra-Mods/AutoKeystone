@@ -1,8 +1,9 @@
-## Interface: 100107
+## Interface: 110105
 ## Author: Hydra
-## Version: 1.77
+## Version: 2.03
 ## Title: Auto Keystone
 ## Notes: Automatically insert keystones into the Font of Power
+## SavedVariables: AutoKeystoneDB
 ## IconTexture: Interface\Icons\inv_relics_hourglass
 
 AutoKeystone.lua
